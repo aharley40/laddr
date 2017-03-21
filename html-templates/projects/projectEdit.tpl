@@ -2,6 +2,13 @@
 
 {block title}{if $data->isPhantom}{_ 'Create'}{else}{_('Edit %s')|sprintf:$data->Title|escape}{/if} &mdash; {_ 'Projects'} &mdash; {$dwoo.parent}{/block}
 
+{block css}
+    {$dwoo.parent}
+    {cssmin array(
+        'templates/projects/projectEdit.css'
+    )}
+{/block}
+
 {block js-bottom}
     {$dwoo.parent}
     {jsmin "epiceditor.js"}
@@ -48,6 +55,7 @@
                     <div class="form-group">
                         <label for="field-url-developers">{_ "URL for Developers"}:</label>
                         <input type="url" name="DevelopersUrl" id="field-url-developers" class="form-control" placeholder="http://github.com/..." value="{refill field=DevelopersUrl default=$Project->DevelopersUrl}"/>
+                        <button type="submit" class="btn btn-primary"  data-toggle="modal" data-target="#syncReadmeModal">Sync README</button>
                     </div>
                     <div class="form-group">
                         <label for="field-chat-channel">{_ "Chat Channel/Hashtag"}:</label>
@@ -118,6 +126,26 @@
                     </div>
                     <button type="submit" class="btn btn-primary">{if $Project->isPhantom}{_ 'Create Project'}{else}{_ 'Save Changes'}{/if}</button>
                 </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="syncReadmeModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Overwriting README</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Pulling readme from developer url. Are you sure you want to continue?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary">Import</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
             </div>
         </div>
     </div>

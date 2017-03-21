@@ -1,0 +1,19 @@
+label[for=field-url-developers] {
+    width: 100%;
+}
+
+#field-url-developers.git-url {
+    display: inline-block;
+    width: 75%;
+}
+
+#field-url-developers + button {
+    display: none;
+    width: 0%;
+    vertical-align: bottom;
+}
+
+#field-url-developers + button.active {
+    display: inline-block;
+    width: 24%;
+}
